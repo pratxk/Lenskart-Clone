@@ -10,10 +10,13 @@ const cors = require('cors');
 
 
 app.use(express.json());
+const corsOptions = {
+    origin: '*', // Replace with your frontend's origin
+    methods: ['GET', 'POST', 'PUT','PATCH', 'DELETE'], // Allowed HTTP methods
+    credentials: true, // Allow cookies and authentication headers
+};
 
-app.use(cors({
-    origin: '*'
-}))
+app.use(cors(corsOptions))
 
 
 app.get('/', (req, res) => {
