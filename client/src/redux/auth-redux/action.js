@@ -1,12 +1,13 @@
 import axios from "axios";
 import { USER_FETCH_FAILURE, USER_FETCH_REQUEST, USER_FETCH_SUCCESS, USER_LOGIN_FAILURE, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT_FAILURE, USER_LOGOUT_SUCCESS, USER_REGISTER_FAILURE, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS } from "./actionTypes";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../store";
 // import { useHistory } from 'react-router-dom';
 
 export const register = (credentials) => async (dispatch) => {
     dispatch({ type: USER_REGISTER_REQUEST });
     try {
-        const response = await axios.post('http://localhost:7002/users/register', credentials);
+        const response = await axios.post(`${API_URL}/users/register`, credentials);
         dispatch({ type: USER_REGISTER_SUCCESS, payload: response.data });
         alert('Registered Successfully');
     } catch (error) {
@@ -18,7 +19,7 @@ export const register = (credentials) => async (dispatch) => {
 export const login = (credentials) => async (dispatch) => {
     dispatch({ type: USER_LOGIN_REQUEST })
     try {
-        const res = await axios.post('http://localhost:7002/users/login', credentials);
+        const res = await axios.post(`${API_URL}/users/login`, credentials);
         const data = res.data;
         dispatch({ type: USER_LOGIN_SUCCESS, payload: res.data });
         localStorage.setItem('token', JSON.stringify(data.token));
@@ -39,7 +40,7 @@ export const fetchUserData = () => async (dispatch) => {
                 Authorization: `Bearer ${token}`,
             },
         };
-        const response = await axios.get('http://localhost:7002/users/register/users/me', config);
+        const response = await axios.get(`${API_URL}/users/register/users/me`, config);
         dispatch({ type: USER_FETCH_SUCCESS, payload: response.data });
     } catch (error) {
         dispatch({ type: USER_FETCH_FAILURE, payload: error.message });
@@ -55,7 +56,7 @@ export const logout = () => async (dispatch) => {
                 Authorization: `Bearer ${token}`,
             },
         };
-        await axios.get('http://localhost:7002/users/logout', config);
+        await axios.get(`${API_URL}/users/logout`, config);
         localStorage.removeItem('token');
         localStorage.removeItem('role');
         dispatch({ type: USER_LOGOUT_SUCCESS });

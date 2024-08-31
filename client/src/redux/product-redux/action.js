@@ -1,6 +1,7 @@
 
 import axios from 'axios';
 import { PRODUCT_FETCH_REQUEST, PRODUCT_FETCH_SUCCESS, PRODUCT_FETCH_FAILURE, PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS, PRODUCT_DELETE_FAILURE, PRODUCT_CREATION_REQUEST, PRODUCT_CREATION_SUCCESS, PRODUCT_CREATION_FAILURE, PRODUCT_SINGLE_FETCH_REQUEST, PRODUCT_SINGLE_FETCH_SUCCESS, PRODUCT_SINGLE_FETCH_FAILURE, PRODUCT_UPDATE_REQUEST, PRODUCT_UPDATE_SUCCESS, PRODUCT_UPDATE_FAILURE } from './actionTypes';
+import { API_URL } from '../store';
 
 export const getProducts = (filters = {}) => async (dispatch) => {
     dispatch({ type: PRODUCT_FETCH_REQUEST });
@@ -14,7 +15,7 @@ export const getProducts = (filters = {}) => async (dispatch) => {
             ...filters, // Spread other filter properties
         }).toString();
 
-        const response = await axios.get(`http://localhost:7002/products?${queryParams}`);
+        const response = await axios.get(`${API_URL}/products?${queryParams}`);
 
         if (response.status >= 200 && response.status < 300) {
             const { products, totalPages, currentPage, totalResults } = response.data;
@@ -39,7 +40,7 @@ export const getSingleProduct = (id) => async (dispatch) => {
             }
         }
 
-        const response = await axios.get(`http://localhost:7002/products/get-single-product/${id}`, config);
+        const response = await axios.get(`${API_URL}/products/get-single-product/${id}`, config);
 
         if (response.status >= 200 && response.status < 300) {
             dispatch({
@@ -59,7 +60,7 @@ export const deleteProducts = (id) => async (dispatch) => {
     dispatch({ type: PRODUCT_DELETE_REQUEST });
     try {
         const token = JSON.parse(localStorage.getItem('token'));
-        const response = await axios.delete(`http://localhost:7002/products/delete-product/${id}`, {
+        const response = await axios.delete(`${API_URL}/products/delete-product/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
         });
         if (response.status >= 200 && response.status < 300) {
@@ -93,7 +94,7 @@ export const createProduct = (data) => async (dispatch) => {
                 'Content-Type': 'application/json',
             }
         }
-        const response = await axios.post('http://localhost:7002/products/create-product', data, config);
+        const response = await axios.post(`${API_URL}/products/create-product`, data, config);
         if (response.status >= 200 && response.status < 300) {
             dispatch({ type: PRODUCT_CREATION_SUCCESS, payload: response.data });
             alert('Successfull');
@@ -122,7 +123,7 @@ export const updateProduct = (id, data) => async (dispatch) => {
                 'Content-Type': 'application/json',
             }
         }
-        const response = await axios.patch(`http://localhost:7002/products/update-product/${id}`,data, config);
+        const response = await axios.patch(`${API_URL}/products/update-product/${id}`, data, config);
         if (response.status >= 200 && response.status < 300) {
             dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: response.data });
             alert('Successfull');

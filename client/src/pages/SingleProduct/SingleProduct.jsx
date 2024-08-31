@@ -49,7 +49,7 @@ const SingleProduct = () => {
     };
 
     const fetchSingleProduct = () => {
-        axios(`http://localhost:7002/products/${id}`)
+        axios(`${API_URL}/products/${id}`)
             .then((res) => setData(res.data.product))
             .catch((err) => console.log(err));
     };
