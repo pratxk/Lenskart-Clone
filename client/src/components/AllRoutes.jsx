@@ -9,10 +9,10 @@ import Orders from '../pages/Orders/Orders';
 import Payment from '../pages/Payment/Payment';
 import Confirm from '../pages/confirm/Confirm';
 import PrivateRoute from './PrivateRoute';
-import Productlist from '../pages/Admin/ProductList';
 import ProductPost from '../pages/Admin/ProductPost';
 import EditProduct from '../pages/Admin/EditProduct';
 import RoleBasedRoute from './RoleBasedRoute';
+import Productlist from '../pages/Admin/ProductList';
 
 const AllRoutes = () => {
     const location = useLocation();
