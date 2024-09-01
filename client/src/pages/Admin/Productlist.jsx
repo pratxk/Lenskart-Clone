@@ -23,7 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteProducts, getProducts } from "../../redux/product-redux/action";
 import Pagination from "../../components/Pagination";
 
-const Productlist = () => {
+const ProductList = () => {
     const navigate = useNavigate();
     const { products = [], isLoading, totalResults, totalPages } = useSelector((state) => state.product);
     const [sort, setSort] = useState("");
@@ -272,5 +272,5 @@ const Productlist = () => {
     );
 };
 
-export default Productlist;
+export default ProductList;
  

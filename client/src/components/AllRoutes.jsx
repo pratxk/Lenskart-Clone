@@ -12,7 +12,7 @@ import PrivateRoute from './PrivateRoute';
 import ProductPost from '../pages/Admin/ProductPost';
 import EditProduct from '../pages/Admin/EditProduct';
 import RoleBasedRoute from './RoleBasedRoute';
-import Productlist from '../pages/Admin/ProductList';
+import ProductList from '../pages/Admin/ProductList';
 
 const AllRoutes = () => {
     const location = useLocation();
@@ -38,7 +38,7 @@ const AllRoutes = () => {
                 <Route path="/payment" element={<PrivateRoute><Payment /></PrivateRoute>} />
                 <Route path="/confirm" element={<PrivateRoute><Confirm /></PrivateRoute>} />
                 <Route path="/product-list" element={
-                    <RoleBasedRoute allowedRoles={['admin']}><Productlist /></RoleBasedRoute>} />
+                <RoleBasedRoute allowedRoles={['admin']}><ProductList /></RoleBasedRoute>} />
                 <Route path="/product-post" element={<RoleBasedRoute allowedRoles={['admin']}><ProductPost /></RoleBasedRoute>} />
                 <Route path="/edit-product/:id" element={<RoleBasedRoute allowedRoles={['admin']}><EditProduct /></RoleBasedRoute>} />
             </Routes>
