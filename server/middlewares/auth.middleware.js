@@ -14,7 +14,7 @@ const auth = async (req, res, next) => {
                 return res.status(401).send('Unauthorized Access...Please Login First');
             }
             if (decoded) {
-                console.log(decoded);
+                // console.log(decoded);
                 req.user = decoded;
                 next();
             }

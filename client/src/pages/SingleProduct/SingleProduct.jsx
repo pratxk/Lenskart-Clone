@@ -49,7 +49,7 @@ const SingleProduct = () => {
     };
 
     const fetchSingleProduct = () => {
-        axios(`${API_URL}/products/${id}`)
+        axios(`https://lenskart-clone-fwxo.onrender.com/products/get-single-product/${id}`)
             .then((res) => setData(res.data.product))
             .catch((err) => console.log(err));
     };

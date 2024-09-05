@@ -25,7 +25,7 @@ export const getCartItems = (filters = {}) => async (dispatch) => {
 
         let queryParams = new URLSearchParams(filters).toString();
 
-        const response = await axios.get(`${API_URL}/cart/view-cart?${queryParams}`, {
+        const response = await axios.get(`https://lenskart-clone-fwxo.onrender.com/cart/view-cart?${queryParams}`, {
             headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -48,7 +48,7 @@ export const createCartItem = (cartData) => async (dispatch) => {
     try {
         const token = JSON.parse(localStorage.getItem('token'));
 
-        const response = await axios.post(`${API_URL}/cart/add-to-cart`, cartData, {
+        const response = await axios.post(`https://lenskart-clone-fwxo.onrender.com/cart/add-to-cart`, cartData, {
             headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -72,7 +72,7 @@ export const updateCartItem = (id, cartData) => async (dispatch) => {
     try {
         const token = JSON.parse(localStorage.getItem('token'));
 
-        const response = await axios.patch(`${API_URL}/cart/update-cart/${id}`, cartData, {
+        const response = await axios.patch(`https://lenskart-clone-fwxo.onrender.com/cart/update-cart/${id}`, cartData, {
             headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -95,7 +95,7 @@ export const deleteCartItem = (id) => async (dispatch) => {
     try {
         const token = JSON.parse(localStorage.getItem('token'));
 
-        const response = await axios.delete(`${API_URL}/cart/delete-cart/${id}`, {
+        const response = await axios.delete(`https://lenskart-clone-fwxo.onrender.com/cart/delete-cart/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -116,7 +116,7 @@ export const cartReset = () => async (dispatch) => {
     try {
         const token = JSON.parse(localStorage.getItem('token'));
 
-        const response = await axios.delete(`${API_URL}/cart/delete-cart`, {
+        const response = await axios.delete(`https://lenskart-clone-fwxo.onrender.com/cart/delete-cart`, {
             headers: { Authorization: `Bearer ${token}` }
         });
 

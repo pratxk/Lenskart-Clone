@@ -7,7 +7,7 @@ import { API_URL } from "../store";
 export const register = (credentials) => async (dispatch) => {
     dispatch({ type: USER_REGISTER_REQUEST });
     try {
-        const response = await axios.post(`${API_URL}/users/register`, credentials);
+        const response = await axios.post(`https://lenskart-clone-fwxo.onrender.com/users/register`, credentials);
         dispatch({ type: USER_REGISTER_SUCCESS, payload: response.data });
         alert('Registered Successfully');
     } catch (error) {
@@ -19,7 +19,7 @@ export const register = (credentials) => async (dispatch) => {
 export const login = (credentials) => async (dispatch) => {
     dispatch({ type: USER_LOGIN_REQUEST })
     try {
-        const res = await axios.post(`${API_URL}/users/login`, credentials);
+        const res = await axios.post(`https://lenskart-clone-fwxo.onrender.com/users/login`, credentials);
         const data = res.data;
         dispatch({ type: USER_LOGIN_SUCCESS, payload: res.data });
         localStorage.setItem('token', JSON.stringify(data.token));
@@ -40,7 +40,7 @@ export const fetchUserData = () => async (dispatch) => {
                 Authorization: `Bearer ${token}`,
             },
         };
-        const response = await axios.get(`${API_URL}/users/register/users/me`, config);
+        const response = await axios.get(`https://lenskart-clone-fwxo.onrender.com/users/register/users/me`, config);
         dispatch({ type: USER_FETCH_SUCCESS, payload: response.data });
     } catch (error) {
         dispatch({ type: USER_FETCH_FAILURE, payload: error.message });

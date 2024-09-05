@@ -1,5 +1,5 @@
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import { Box, Button, Checkbox, Flex, FormControl, FormLabel, Heading, HStack, Image, Input, InputGroup, InputRightElement, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Checkbox, Flex, FormControl, FormLabel, Heading, HStack, Image, Input, InputGroup, InputRightElement, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, useDisclosure, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom';
@@ -9,17 +9,23 @@ const Login = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [data, setData] = useState({});
     const dispatch = useDispatch();
+    const toast = useToast();
     const { isAuthenticated } = useSelector(state => state.auth);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setData({ ...data, [name]: value })
+        setData({ ...data, [name]: value });
     }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(login(data));
     }
 
-    if (isAuthenticated) {
+
+
+    if (isAuthenticated) { // Debugging: log this to check what value is retrieved
+
         toast({
             description: "Logged in successfully",
             status: "success",
@@ -27,8 +33,11 @@ const Login = () => {
             isClosable: true,
             position: "top"
         });
-        return <Navigate to={'/'} />
+
+        // Ensure this condition redirects correctly based on the role
+        return <Navigate to={'/'}/>
     }
+
     return (
         <>
             <Button onClick={onOpen}>Log In</Button>
@@ -123,4 +132,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Login;
